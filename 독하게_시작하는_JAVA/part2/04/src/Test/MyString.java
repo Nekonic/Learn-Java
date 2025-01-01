@@ -1,7 +1,10 @@
-class MyString {
-    private byte[] string;
+package Test;
 
-    public MyString(){
+public class MyString {
+    private static byte[] string;
+    private static int count;
+
+    protected MyString(){
         string = null;
     }
 
@@ -13,7 +16,18 @@ class MyString {
         string = String.format("%d",str).getBytes();
     }
 
+    public static MyString newMyString(String str){
+        count++;
+        return new MyString(str);
+    }
+
+    public static MyString newMyString(int str){
+        count++;
+        return new MyString(str);
+    }
+
     public MyString(MyString rhs){
+        count++;
         this.deepCopy(rhs);
     }
 
@@ -26,7 +40,11 @@ class MyString {
     }
 
     public void setString(String param){
-        string = param.getBytes();
+        string = onSetString(param).getBytes();
+    }
+
+    protected String onSetString(String param){
+        return param;
     }
 
     public int length(){
@@ -38,28 +56,16 @@ class MyString {
     }
 
     public void deepCopy(MyString rhs){
-        this.string = rhs.string.clone();
+        string = string.clone();
     }
 
     public int compareTo(String string1){
         if(string1.equals(this.getString()))return 0;
         return 1;
     }
-}
 
-public class Main {
-    public static void main(String[] args) {
-        MyString s = new MyString("Test");
-        System.out.println(s.getString());
-        MyString s2 = new MyString(512);
-        System.out.println(s2.getString());
-        MyString s3 = new MyString(s);
-        System.out.println(s3.getString());
-
-        s.deepCopy(s2);
-        s2.setString("test");
-        System.out.println(s.getString());
-        System.out.println(s2.getString());
-        System.out.println(s3.getString());
+    public static int getCount(){
+        return count;
     }
 }
+
