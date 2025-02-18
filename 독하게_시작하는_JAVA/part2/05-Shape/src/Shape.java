@@ -1,6 +1,5 @@
-public class Shape {
-    public void render(){
-    }
+abstract class Shape {
+    abstract public void render();
 }
 
 class Rectangle extends Shape{
