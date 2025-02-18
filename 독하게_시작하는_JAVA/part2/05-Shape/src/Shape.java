@@ -1,8 +1,8 @@
-abstract class Shape {
-    abstract public void render();
+interface Shape {
+    public void render();
 }
 
-class Rectangle extends Shape{
+class Rectangle implements Shape{
     @Override
     public void render(){
         for(int i=0; i<5; ++i){
@@ -14,7 +14,7 @@ class Rectangle extends Shape{
     }
 }
 
-class Triangle extends Shape{
+class Triangle implements Shape{
     @Override
     public void render(){
         for(int i=0; i<5; ++i){
